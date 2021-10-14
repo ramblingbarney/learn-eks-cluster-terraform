@@ -3,21 +3,16 @@ resource "aws_security_group" "eks_sg" {
   name        = "Demo Security Group"
   description = "Demo Module"
   vpc_id      = aws_vpc.eks_command.id
+
   # Inbound Rules
   # HTTP access from anywhere
   ingress {
-    from_port   = 80
-    to_port     = 80
+    from_port   = var.server_port
+    to_port     = var.server_port
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
-  # HTTPS access from anywhere
-  ingress {
-    from_port   = 443
-    to_port     = 443
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
+
   # SSH access from anywhere
   ingress {
     from_port   = 22
@@ -25,6 +20,7 @@ resource "aws_security_group" "eks_sg" {
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
+
   # Outbound Rules
   # Internet access to anywhere
   egress {
