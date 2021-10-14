@@ -19,7 +19,7 @@ resource "aws_instance" "command_instance" {
 
     key_name = aws_key_pair.eks_key.key_name
 
-    vpc_security_group_ids = [aws_security_group.eks_sg.id]
+    vpc_security_group_ids = [aws_security_group.web_sg.id]
 
     subnet_id = aws_subnet.eks_subnet.id
 

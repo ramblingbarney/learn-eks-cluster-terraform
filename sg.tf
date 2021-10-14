@@ -1,5 +1,5 @@
 # Creating Security Group for ELB
-resource "aws_security_group" "eks_sg" {
+resource "aws_security_group" "web_sg" {
   name        = "Demo Security Group"
   description = "Demo Module"
   vpc_id      = aws_vpc.eks_command.id
@@ -7,8 +7,8 @@ resource "aws_security_group" "eks_sg" {
   # Inbound Rules
   # HTTP access from anywhere
   ingress {
-    from_port   = var.server_port
-    to_port     = var.server_port
+    from_port   = 80
+    to_port     = 80
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
