@@ -1,7 +1,8 @@
-output "aws_secret_key" {
-  value = aws_iam_secret_key.k8_admin.encrypted_secret
+output "k8_admin_user_id" {
+  value = aws_iam_access_key.k8_admin.id
 }
 
-output "aws_access_key" {
-  value = aws_iam_access_key.k8_admin.encrypted_secret
+output "k8_admin_user_secret" {
+  value     = aws_iam_access_key.k8_admin.encrypted_secret
+  sensitive = true
 }
