@@ -4,10 +4,14 @@ resource "aws_instance" "command_instance" {
     instance_type = "t2.micro"
 
     user_data = <<-EOF
-                  #!/bin/bash
-                  echo "Hello, World" > index.html
-                  nohup busybox httpd -f -p "${var.server_port}" &
-                  EOF
+        #!/bin/bash
+        sudo yum update -y &&
+        sudo yum install -y httpd &&
+        sudo service httpd start -p &&
+        sudo chkconfig httpd on &&
+        printf "Hello Terraform World" > index.html &&
+        sudo mv index.html /var/www/html/
+        EOF
 
     lifecycle {
       create_before_destroy = true
